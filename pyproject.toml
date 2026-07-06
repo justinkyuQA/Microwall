@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "microwall"
+version = "1.0.0"
+description = "Tiny firewall rule analyzer"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+
+authors = [
+    {name = "Greenfield Projects"}
+]
+
+keywords = [
+    "firewall",
+    "iptables",
+    "nftables",
+    "network",
+    "security"
+]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent"
+]
+
+[project.scripts]
+microwall = "microwall.cli:main"
+
+[tool.setuptools]
+packages = ["microwall"]

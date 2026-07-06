@@ -1,0 +1,24 @@
+Metadata-Version: 2.4
+Name: microwall
+Version: 1.0.0
+Summary: Tiny firewall rule analyzer
+Author: Greenfield Projects
+License: MIT
+Keywords: firewall,iptables,nftables,network,security
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+# MicroWall
+
+A simplified firewall analyzer.
+
+Features
+
+- Read firewall rule files
+- Count allow/block rules
+- Display rules
+- Educational CLI

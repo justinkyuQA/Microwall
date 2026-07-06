@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+ROOT="$HOME/projects"
+
+GREEN="\033[32m"
+RED="\033[31m"
+YELLOW="\033[33m"
+NC="\033[0m"
+
+PASS=0
+FAIL=0
+SKIP=0
+
+echo
+echo "=================================================="
+echo "        NINE-EYES BUILDER"
+echo "=================================================="
+echo
+
+for DIR in "$ROOT"/*
+do
+    [ -d "$DIR" ] || continue
+
+    NAME=$(basename "$DIR")
+
+    case "$NAME" in
+        Nine-Eyes)
+            continue
+        ;;
+    esac
+
+    if [ ! -f "$DIR/pyproject.toml" ]; then
+        printf "${YELLOW}SKIP${NC} %-25s (no pyproject.toml)\n" "$NAME"
+        SKIP=$((SKIP+1))
+        continue
+    fi
+
+    echo
+    echo "----------------------------------------"
+    echo "$NAME"
+    echo "----------------------------------------"
+
+    (
+        cd "$DIR" || exit 1
+
+        rm -rf build dist *.egg-info >/dev/null 2>&1
+
+        if python3 -m build >/dev/null 2>&1
+        then
+            printf "${GREEN}PASS${NC} %s\n" "$NAME"
+            PASS=$((PASS+1))
+        else
+            printf "${RED}FAIL${NC} %s\n" "$NAME"
+            FAIL=$((FAIL+1))
+        fi
+    )
+
+done
+
+echo
+echo "=================================================="
+echo "SUMMARY"
+echo "=================================================="
+
+echo "Passed : $PASS"
+echo "Failed : $FAIL"
+echo "Skipped: $SKIP"
+
+echo
+echo "Builder complete."

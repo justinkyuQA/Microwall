@@ -1,0 +1,5 @@
+allow tcp 22
+allow tcp 80
+allow tcp 443
+deny tcp 23
+deny all
